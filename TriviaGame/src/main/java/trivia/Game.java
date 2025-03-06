@@ -1,10 +1,11 @@
 package trivia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // REFACTOR ME
 public class Game implements IGame {
-    ArrayList<Player> players = new ArrayList<>();
+    private final List<Player> players = new ArrayList<>();
     private final QuestionManager questionManager;
     int currentPlayerIndex = 0;
     boolean isGettingOutOfPenaltyBox;
