@@ -19,6 +19,9 @@ class GildedRose {
                 case "Sulfuras, Hand of Ragnaros":
                     handleItemSulfuras(item);
                     break;
+                case "Conjured" :
+                    handleItemConjured(item);
+                    break;
                 default:
                     handleItemRegular(item);
                     break;
@@ -63,6 +66,18 @@ class GildedRose {
         }
         item.sellIn--;
     }
+
+    public void handleItemConjured(Item item) {
+        if (item.quality > 0) {
+            item.quality -= (item.sellIn > 0 ? 2 : 4);
+            if (item.quality < 0) {
+                item.quality = 0;
+            }
+        }
+        item.sellIn--;
+    }
+
+
 }
 
 
