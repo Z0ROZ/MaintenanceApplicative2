@@ -6,7 +6,5 @@ public class SulfurasItem extends AgedBrieItem {
         super(item);
     }
 
-    public void updateQuality() {
-
-    }
+    public void updateQuality() {}
 }
