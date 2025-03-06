@@ -7,11 +7,13 @@ import java.util.List;
 public class Game implements IGame {
     private final List<Player> players = new ArrayList<>();
     private final QuestionManager questionManager;
+    private final AnswerHandler answerHandler;
     int currentPlayerIndex = 0;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
         this.questionManager = new QuestionManager();
+        this.answerHandler = new AnswerHandler(this);
     }
 
     public boolean add(String playerName) {
@@ -37,20 +39,22 @@ public class Game implements IGame {
 
     public void handlePenaltyBox(Player currentPlayer, int roll) {
         if (roll % 2 != 0) {
-            isGettingOutOfPenaltyBox = true;
+            currentPlayer.exitPenaltyBox();
+            System.out.println("Penalty box exited");
             System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
             movePlayer(currentPlayer, roll);
         } else {
             System.out.println(currentPlayer.getName() + " is not getting out of the penalty box");
-            isGettingOutOfPenaltyBox = false;
+            currentPlayer.enterPenaltyBox();
         }
     }
 
     private void movePlayer(Player player, int roll) {
         player.move(roll);
+        Category category = currentCategory();
         System.out.println(player.getName() + "'s new location is " + player.getPosition());
-        System.out.println("The category is " + currentCategory().getDisplayName());
-        askQuestion(currentCategory());
+        System.out.println("The category is " + category.getDisplayName());
+        askQuestion(category);
     }
 
     private void askQuestion(Category category) {
@@ -73,12 +77,10 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
-        AnswerHandler answerHandler = new AnswerHandler(this);
         return answerHandler.correctAnswer();
     }
 
     public boolean wrongAnswer() {
-        AnswerHandler answerHandler = new AnswerHandler(this);
         return answerHandler.incorrectAnswer();
     }
 

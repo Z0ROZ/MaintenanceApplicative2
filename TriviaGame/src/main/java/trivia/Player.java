@@ -35,9 +35,14 @@ public class Player {
         if (position > 12) position -= 12;
     }
 
-    public void sendToPenaltyBox() {
+    public void enterPenaltyBox() {
         inPenaltyBox = true;
     }
+
+    public void exitPenaltyBox() {
+        inPenaltyBox = false;
+    }
+
 
 
 

@@ -29,7 +29,7 @@ public class AnswerHandler {
         Player currentPlayer = game.getCurrentPlayer();
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer.getName() + " was sent to the penalty box");
-        currentPlayer.sendToPenaltyBox();
+        currentPlayer.enterPenaltyBox();
         game.nextPlayer();
         return true;
     }
