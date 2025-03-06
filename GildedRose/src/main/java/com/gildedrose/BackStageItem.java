@@ -10,17 +10,17 @@ public class BackStageItem extends AbstractItemHandler {
     public void updateQuality() {
         if (item.sellIn > 0) {
             if (item.quality < 50) {
-                item.quality += 1;
+                item.quality++;
                 if (item.sellIn < 11 && item.quality < 50) {
-                    item.quality += 1;
+                    item.quality++;
                 }
                 if (item.sellIn < 6 && item.quality < 50) {
-                    item.quality += 1;
+                    item.quality++;
                 }
             }
         } else {
             item.quality = 0;
         }
-        item.sellIn -= 1;
+        item.sellIn--;
     }
 }
