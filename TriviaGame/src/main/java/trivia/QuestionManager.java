@@ -1,35 +1,31 @@
 package trivia;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class QuestionManager {
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
-
+    private final Map<Category, LinkedList<String>> questionsMap;
 
     public QuestionManager() {
+        questionsMap = new HashMap<>();
+        for (Category category : Category.values()) {
+            questionsMap.put(category, new LinkedList<>());
+        }
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
+            questionsMap.get(Category.POP).addLast("Pop Question " + i);
+            questionsMap.get(Category.SCIENCE).addLast("Science Question " + i);
+            questionsMap.get(Category.SPORTS).addLast("Sports Question " + i);
+            questionsMap.get(Category.ROCK).addLast("Rock Question " + i);
         }
     }
 
-    public String getNextQuestion(String category) {
-        switch (category) {
-            case "Pop":
-                return popQuestions.removeFirst();
-            case "Science":
-                return scienceQuestions.removeFirst();
-            case "Sports":
-                return sportsQuestions.removeFirst();
-            case "Rock":
-                return rockQuestions.removeFirst();
-            default:
-                throw new IllegalArgumentException("Unknown category: " + category);
+    public String getNextQuestion(Category category) {
+        LinkedList<String> list = questionsMap.get(category);
+        if (list.isEmpty()) {
+            return "No more questions for " + category.getDisplayName();
+        } else {
+            return list.removeFirst();
         }
     }
 }
