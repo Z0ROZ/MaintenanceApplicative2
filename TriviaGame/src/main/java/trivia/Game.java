@@ -7,12 +7,10 @@ import java.util.List;
 public class Game implements IGame {
     private final List<Player> players = new ArrayList<>();
     private final QuestionManager questionManager;
-    private final AnswerHandler answerHandler;
     int currentPlayerIndex = 0;
 
     public Game() {
         this.questionManager = new QuestionManager();
-        this.answerHandler = new AnswerHandler(this);
     }
 
     public boolean add(String playerName) {
@@ -61,11 +59,29 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
-        return answerHandler.handleCorrectAnswer();
+        Player currentPlayer = getCurrentPlayer();
+
+        if (currentPlayer.getPenaltyBox()) {
+            nextPlayer();
+            return true;
+        }
+
+        System.out.println("Answer was correct!!!!");
+        currentPlayer.addPurses(1);
+        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
+
+        nextPlayer();
+
+        return currentPlayer.getPurses() != 6;
     }
 
     public boolean handleIncorrectAnswer() {
-        return answerHandler.handleIncorrectAnswer();
+        Player currentPlayer = getCurrentPlayer();
+        System.out.println("Question was incorrectly answered");
+        System.out.println(currentPlayer.getName() + " was sent to the penalty box");
+        currentPlayer.enterPenaltyBox();
+        nextPlayer();
+        return true;
     }
 
     public void nextPlayer() {
