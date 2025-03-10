@@ -61,11 +61,11 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
-        return answerHandler.correctAnswer();
+        return answerHandler.handleCorrectAnswer();
     }
 
     public boolean handleIncorrectAnswer() {
-        return answerHandler.incorrectAnswer();
+        return answerHandler.handleIncorrectAnswer();
     }
 
     public void nextPlayer() {

@@ -7,7 +7,7 @@ public class AnswerHandler {
         this.game = game;
     }
 
-    public boolean correctAnswer() {
+    public boolean handleCorrectAnswer() {
         Player currentPlayer = game.getCurrentPlayer();
 
         if (currentPlayer.getPenaltyBox()) {
@@ -24,7 +24,7 @@ public class AnswerHandler {
         return currentPlayer.getPurses() != 6;
     }
 
-    public boolean incorrectAnswer() {
+    public boolean handleIncorrectAnswer() {
         Player currentPlayer = game.getCurrentPlayer();
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer.getName() + " was sent to the penalty box");
