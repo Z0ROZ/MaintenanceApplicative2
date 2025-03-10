@@ -35,7 +35,8 @@ public class Game implements IGame {
     }
 
     public void handleJail(Player currentPlayer, int roll) {
-        if (roll % 2 != 0) {
+        boolean isJail = roll % 2 != 0;
+        if (isJail) {
             currentPlayer.exitJail();
             System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
             movePlayer(currentPlayer, roll);
@@ -69,10 +70,10 @@ public class Game implements IGame {
         System.out.println("Answer was correct!!!!");
         currentPlayer.addPurses(1);
         System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
-
+        boolean winner = currentPlayer.getPurses() != 6;
         nextPlayer();
 
-        return currentPlayer.getPurses() != 6;
+        return winner;
     }
 
     public boolean handleIncorrectAnswer() {
@@ -85,7 +86,6 @@ public class Game implements IGame {
     }
 
     public void nextPlayer() {
-        currentPlayerIndex++;
-        if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 }
