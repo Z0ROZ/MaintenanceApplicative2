@@ -1,7 +1,6 @@
 package trivia;
 
 public class Player {
-    private static final int MAX_POSITION = 12;
     private final String name;
     private int purses = 0;
     private int position = 1;
@@ -23,17 +22,16 @@ public class Player {
         return position;
     }
 
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public boolean getPenaltyBox() {
         return inPenaltyBox;
     }
 
     public void addPurses(int purses) {
         this.purses += purses;
-    }
-
-    public void move(int roll) {
-        position += roll;
-        if (position > MAX_POSITION) position -= MAX_POSITION;
     }
 
     public void enterJail() {

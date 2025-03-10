@@ -7,6 +7,7 @@ import java.util.List;
 public class Game implements IGame {
     private final List<Player> players = new ArrayList<>();
     private final QuestionManager questionManager;
+    private static final int MAX_POSITION = 12;
     int currentPlayerIndex = 0;
 
     public Game() {
@@ -47,7 +48,8 @@ public class Game implements IGame {
     }
 
     private void movePlayer(Player player, int roll) {
-        player.move(roll);
+        player.setPosition(player.getPosition() + roll);
+        if(player.getPosition() > MAX_POSITION) {player.setPosition(MAX_POSITION);}
         Category category = questionManager.getCurrentCategory(player.getPosition());
         System.out.println(player.getName() + "'s new location is " + player.getPosition());
         System.out.println("The category is " + category.getDisplayName());
