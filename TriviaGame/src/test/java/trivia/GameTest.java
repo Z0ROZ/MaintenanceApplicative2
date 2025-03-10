@@ -137,5 +137,14 @@ public class GameTest {
 		assertEquals(6, player.getPurses(), "Le joueur devrait avoir 6 purses à la fin");
 		assertFalse(game.handleCorrectAnswer(), "Le jeu devrait se terminer lorsque le joueur atteint 6 purses");
 	}
+
+	@Test
+	public void testMaxPlayers() {
+		for (int i = 0; i < 7; i++) {
+			game.add("Player " + i);
+		}
+
+		assertEquals(6, game.getPlayers(), "La partie doit avoir 6 joueurs");
+	}
 }
 

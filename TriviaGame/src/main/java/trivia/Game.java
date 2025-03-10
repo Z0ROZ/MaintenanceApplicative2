@@ -10,6 +10,7 @@ public class Game implements IGame {
 
     private static final int MAX_POSITION = 12;
     private static final int MAX_PURSES = 6;
+    private static final int MAX_PLAYERS = 6;
 
     int currentPlayerIndex = 0;
 
@@ -18,10 +19,12 @@ public class Game implements IGame {
     }
 
     public boolean add(String playerName) {
-        Player newPlayer = new Player(playerName);
-        players.add(newPlayer);
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
+        if(players.size() < MAX_PLAYERS) {
+            Player newPlayer = new Player(playerName);
+            players.add(newPlayer);
+            System.out.println(playerName + " was added");
+            System.out.println("They are player number " + players.size());
+        }
         return true;
     }
 
