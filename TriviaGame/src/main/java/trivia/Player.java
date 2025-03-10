@@ -36,11 +36,11 @@ public class Player {
         if (position > MAX_POSITION) position -= MAX_POSITION;
     }
 
-    public void enterPenaltyBox() {
+    public void enterJail() {
         inPenaltyBox = true;
     }
 
-    public void exitPenaltyBox() {
+    public void exitJail() {
         inPenaltyBox = false;
     }
 

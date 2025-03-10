@@ -27,21 +27,21 @@ public class Game implements IGame {
         System.out.println("They have rolled a " + roll);
 
         if (currentPlayer.getPenaltyBox()) {
-            handlePenaltyBox(currentPlayer, roll);
+            handleJail(currentPlayer, roll);
         } else {
             movePlayer(currentPlayer, roll);
         }
 
     }
 
-    public void handlePenaltyBox(Player currentPlayer, int roll) {
+    public void handleJail(Player currentPlayer, int roll) {
         if (roll % 2 != 0) {
-            currentPlayer.exitPenaltyBox();
+            currentPlayer.exitJail();
             System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
             movePlayer(currentPlayer, roll);
         } else {
             System.out.println(currentPlayer.getName() + " is not getting out of the penalty box");
-            currentPlayer.enterPenaltyBox();
+            currentPlayer.enterJail();
         }
     }
 
@@ -59,7 +59,7 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
-        Player currentPlayer = getCurrentPlayer();
+        Player currentPlayer = players.get(currentPlayerIndex);
 
         if (currentPlayer.getPenaltyBox()) {
             nextPlayer();
@@ -76,10 +76,10 @@ public class Game implements IGame {
     }
 
     public boolean handleIncorrectAnswer() {
-        Player currentPlayer = getCurrentPlayer();
+        Player currentPlayer = players.get(currentPlayerIndex);
         System.out.println("Question was incorrectly answered");
         System.out.println(currentPlayer.getName() + " was sent to the penalty box");
-        currentPlayer.enterPenaltyBox();
+        currentPlayer.enterJail();
         nextPlayer();
         return true;
     }
@@ -88,9 +88,4 @@ public class Game implements IGame {
         currentPlayerIndex++;
         if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
     }
-
-    public Player getCurrentPlayer() {
-        return players.get(currentPlayerIndex);
-    }
-
 }
