@@ -64,7 +64,7 @@ public class Game implements IGame {
         return answerHandler.correctAnswer();
     }
 
-    public boolean wrongAnswer() {
+    public boolean handleIncorrectAnswer() {
         return answerHandler.incorrectAnswer();
     }
 

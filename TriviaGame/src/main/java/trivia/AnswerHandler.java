@@ -7,7 +7,6 @@ public class AnswerHandler {
         this.game = game;
     }
 
-
     public boolean correctAnswer() {
         Player currentPlayer = game.getCurrentPlayer();
 
@@ -20,9 +19,9 @@ public class AnswerHandler {
         currentPlayer.addPurses(1);
         System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
 
-        boolean winner = currentPlayer.getPurses() != 6;
         game.nextPlayer();
-        return winner;
+
+        return currentPlayer.getPurses() != 6;
     }
 
     public boolean incorrectAnswer() {
