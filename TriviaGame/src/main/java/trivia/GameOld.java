@@ -150,7 +150,7 @@ public class GameOld implements IGame {
       }
    }
 
-   public boolean wrongAnswer() {
+   public boolean handleIncorrectAnswer() {
       System.out.println("Question was incorrectly answered");
       System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
       inPenaltyBox[currentPlayer] = true;
