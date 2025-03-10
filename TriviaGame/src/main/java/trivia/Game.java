@@ -7,7 +7,10 @@ import java.util.List;
 public class Game implements IGame {
     private final List<Player> players = new ArrayList<>();
     private final QuestionManager questionManager;
+
     private static final int MAX_POSITION = 12;
+    private static final int MAX_PURSES = 6;
+
     int currentPlayerIndex = 0;
 
     public Game() {
@@ -69,13 +72,14 @@ public class Game implements IGame {
             return true;
         }
 
-        System.out.println("Answer was correct!!!!");
-        currentPlayer.addPurses(1);
-        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
-        boolean winner = currentPlayer.getPurses() != 6;
+        if(currentPlayer.getPurses() < MAX_PURSES) {
+            System.out.println("Answer was correct!!!!");
+            currentPlayer.addPurses(1);
+            System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
+        }
+        boolean gameContinues = currentPlayer.getPurses() < MAX_PURSES;
         nextPlayer();
-
-        return winner;
+        return  gameContinues;
     }
 
     public boolean handleIncorrectAnswer() {
@@ -89,5 +93,13 @@ public class Game implements IGame {
 
     public void nextPlayer() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
+
+    public int getPlayers() {
+        return players.size();
     }
 }
