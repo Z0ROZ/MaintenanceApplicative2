@@ -9,14 +9,15 @@ public class QuestionManager {
 
     public QuestionManager() {
         questionsMap = new HashMap<>();
+
         for (Category category : Category.values()) {
             questionsMap.put(category, new LinkedList<>());
         }
+
         for (int i = 0; i < 50; i++) {
-            questionsMap.get(Category.POP).addLast("Pop Question " + i);
-            questionsMap.get(Category.SCIENCE).addLast("Science Question " + i);
-            questionsMap.get(Category.SPORTS).addLast("Sports Question " + i);
-            questionsMap.get(Category.ROCK).addLast("Rock Question " + i);
+            for (Category category : Category.values()) {
+                questionsMap.get(category).addLast(category.getDisplayName() + " Question " + i);
+            }
         }
     }
 
@@ -26,6 +27,19 @@ public class QuestionManager {
             return "No more questions for " + category.getDisplayName();
         } else {
             return list.removeFirst();
+        }
+    }
+
+    public Category getCurrentCategory(int position) {
+        switch ((position - 1) % 4) {
+            case 0:
+                return Category.POP;
+            case 1:
+                return Category.SCIENCE;
+            case 2:
+                return Category.SPORTS;
+            default:
+                return Category.ROCK;
         }
     }
 }

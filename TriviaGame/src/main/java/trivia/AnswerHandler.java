@@ -11,7 +11,7 @@ public class AnswerHandler {
     public boolean correctAnswer() {
         Player currentPlayer = game.getCurrentPlayer();
 
-        if (currentPlayer.isInPenaltyBox() && !game.getIsOutOfPenaltyBox()) {
+        if (currentPlayer.getPenaltyBox()) {
             game.nextPlayer();
             return true;
         }
@@ -20,7 +20,7 @@ public class AnswerHandler {
         currentPlayer.addPurses(1);
         System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getPurses() + " Gold Coins.");
 
-        boolean winner =currentPlayer.getPurses() != 6;
+        boolean winner = currentPlayer.getPurses() != 6;
         game.nextPlayer();
         return winner;
     }

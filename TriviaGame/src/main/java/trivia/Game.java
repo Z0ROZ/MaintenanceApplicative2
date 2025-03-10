@@ -9,7 +9,6 @@ public class Game implements IGame {
     private final QuestionManager questionManager;
     private final AnswerHandler answerHandler;
     int currentPlayerIndex = 0;
-    boolean isGettingOutOfPenaltyBox;
 
     public Game() {
         this.questionManager = new QuestionManager();
@@ -29,7 +28,7 @@ public class Game implements IGame {
         System.out.println(currentPlayer.getName() + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (currentPlayer.isInPenaltyBox()) {
+        if (currentPlayer.getPenaltyBox()) {
             handlePenaltyBox(currentPlayer, roll);
         } else {
             movePlayer(currentPlayer, roll);
@@ -40,7 +39,6 @@ public class Game implements IGame {
     public void handlePenaltyBox(Player currentPlayer, int roll) {
         if (roll % 2 != 0) {
             currentPlayer.exitPenaltyBox();
-            System.out.println("Penalty box exited");
             System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
             movePlayer(currentPlayer, roll);
         } else {
@@ -51,7 +49,7 @@ public class Game implements IGame {
 
     private void movePlayer(Player player, int roll) {
         player.move(roll);
-        Category category = currentCategory();
+        Category category = questionManager.getCurrentCategory(player.getPosition());
         System.out.println(player.getName() + "'s new location is " + player.getPosition());
         System.out.println("The category is " + category.getDisplayName());
         askQuestion(category);
@@ -60,20 +58,6 @@ public class Game implements IGame {
     private void askQuestion(Category category) {
         String question = questionManager.getNextQuestion(category);
         System.out.println(question);
-    }
-
-    private Category currentCategory() {
-        int position = (players.get(currentPlayerIndex).getPosition() - 1) % 4;
-        switch (position) {
-            case 0:
-                return Category.POP;
-            case 1:
-                return Category.SCIENCE;
-            case 2:
-                return Category.SPORTS;
-            default:
-                return Category.ROCK;
-        }
     }
 
     public boolean handleCorrectAnswer() {
@@ -93,7 +77,4 @@ public class Game implements IGame {
         return players.get(currentPlayerIndex);
     }
 
-    public boolean getIsOutOfPenaltyBox() {
-        return isGettingOutOfPenaltyBox;
-    }
 }

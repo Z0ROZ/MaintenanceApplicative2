@@ -1,6 +1,7 @@
 package trivia;
 
 public class Player {
+    private static final int MAX_POSITION = 12;
     private final String name;
     private int purses = 0;
     private int position = 1;
@@ -22,7 +23,7 @@ public class Player {
         return position;
     }
 
-    public boolean isInPenaltyBox() {
+    public boolean getPenaltyBox() {
         return inPenaltyBox;
     }
 
@@ -32,7 +33,7 @@ public class Player {
 
     public void move(int roll) {
         position += roll;
-        if (position > 12) position -= 12;
+        if (position > MAX_POSITION) position -= MAX_POSITION;
     }
 
     public void enterPenaltyBox() {
@@ -42,8 +43,5 @@ public class Player {
     public void exitPenaltyBox() {
         inPenaltyBox = false;
     }
-
-
-
 
 }
