@@ -49,7 +49,7 @@ public class Game implements IGame {
 
     private void movePlayer(Player player, int roll) {
         player.setPosition(player.getPosition() + roll);
-        if(player.getPosition() > MAX_POSITION) {player.setPosition(MAX_POSITION);}
+        if(player.getPosition() > MAX_POSITION) {player.setPosition(player.getPosition()-MAX_POSITION);}
         Category category = questionManager.getCurrentCategory(player.getPosition());
         System.out.println(player.getName() + "'s new location is " + player.getPosition());
         System.out.println("The category is " + category.getDisplayName());
