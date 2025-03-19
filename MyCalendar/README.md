@@ -8,7 +8,7 @@ Appliquer des principes propres à la maintenance applicative en faisant évolue
 
 Pour pimenter un peu les choses, il y aura quelques petites contraintes:
 - Utiliser exclusivement des Value Objects  
-// interdiction d'utiliser des Event.primitives nues  
+// interdiction d'utiliser des event.primitives nues  
 - Implémenter une solution reposant sur le polymorphisme  
 // interdiction d'utiliser des conditionnels (if, switch, opérateur ternaire).
 
@@ -16,7 +16,7 @@ Pour pimenter un peu les choses, il y aura quelques petites contraintes:
 ## 📌 Contexte du TP :
 Votre supérieur, fan de *COBOL* et "autodicacte" a dévellopé un projet nommé **« *ancient.CalendarManager* »** (oui, une application avec un nom anglais, c'est plus classe), une application minimaliste de gestion d’événements et rendez-vous. Il n'a pas du tout confiance en l'utilisation de code externe (il a déjà fallu batailler pour passer aux fax...), donc il n'est même pas la peine de lui proposer une autre solution, même éprouvée. 
 
-L’application souffre d’une mauvaise conception initiale (utilisation excessive de Event.primitives, couplage fort, répétitions de conditionnels, etc.).
+L’application souffre d’une mauvaise conception initiale (utilisation excessive de event.primitives, couplage fort, répétitions de conditionnels, etc.).
 
 Votre rôle est d'appliquer une stratégie de refactoring progressif afin de transformer ce code fragile en un système robuste, facilement maintenable et évolutif.
 
@@ -32,7 +32,7 @@ Chaque fonctionnalité doit être écrite en suivant strictement la démarche TD
 - Implémenter le code nécessaire pour passer le test (vert).
 - Refactorer sans casser les tests précédents.
 
-### Interdiction des Event.primitives nues :
+### Interdiction des event.primitives nues :
 Toutes les données métier (dates, heures, durées, titres, lieux) doivent être représentées par des Value Objects immuables.
 Exemples obligatoires de Value Objects : 
 - DateEvenement,
