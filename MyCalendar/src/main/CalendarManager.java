@@ -39,19 +39,6 @@ public class CalendarManager {
         return result;
     }
 
-    public boolean conflit(Event e1, Event e2) {
-        if (e1 instanceof Periodique || e2 instanceof Periodique) {
-            return false; // Exclusion des événements périodiques pour les conflits
-        }
-
-        LocalDateTime debut1 = e1.getDateDebut();
-        LocalDateTime fin1 = debut1.plusMinutes(((RendezVous) e1).getDuree().minutes());
-
-        LocalDateTime debut2 = e2.getDateDebut();
-        LocalDateTime fin2 = debut2.plusMinutes(((RendezVous) e2).getDuree().minutes());
-
-        return debut1.isBefore(fin2) && fin1.isAfter(debut2);
-    }
 
     public void afficherEvenements() {
         evenements.forEach(e -> System.out.println(e.description()));
