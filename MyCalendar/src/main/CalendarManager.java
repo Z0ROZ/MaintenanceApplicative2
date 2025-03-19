@@ -1,46 +1,30 @@
 import Event.Event;
-import Event.Periodique;
-import Event.RendezVous;
-
-
+import calendar.Calendar;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
+
 public class CalendarManager {
-    private final List<Event> evenements;
+
+    private final Calendar calendar;
 
     public CalendarManager() {
-        this.evenements = new ArrayList<>();
+        this.calendar = new Calendar();
     }
+
 
     public void ajouterEvenement(Event evenement) {
-        evenements.add(evenement);
+        calendar.ajouterEvenement(evenement);
     }
 
-    public List<Event> evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        List<Event> result = new ArrayList<>();
 
-        for (Event e : evenements) {
-            if (e instanceof Periodique ep) {
-                LocalDateTime temp = ep.getDateDebut();
-                while (temp.isBefore(fin)) {
-                    if (!temp.isBefore(debut)) {
-                        result.add(ep);
-                        break;
-                    }
-                    temp = temp.plusDays(ep.getFrequence().jours());
-                }
-            } else if (!e.getDateDebut().isBefore(debut) &&
-                    !e.getDateDebut().isAfter(fin)) {
-                result.add(e);
-            }
-        }
-        return result;
+    public List<Event> evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
+        return calendar.evenementsDansPeriode(debut, fin);
     }
 
 
     public void afficherEvenements() {
-        evenements.forEach(e -> System.out.println(e.description()));
+        calendar.afficherEvenements();
     }
 }
+

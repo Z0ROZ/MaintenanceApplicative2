@@ -22,12 +22,6 @@ public abstract class Event {
 
     public abstract String description();
 
+    public abstract boolean isInPeriod(LocalDateTime debut, LocalDateTime fin);
 
-    public LocalDateTime getDateDebut() {
-        return dateDebut;
-    }
-
-    public DureeEvenement getDuree() {
-        return duree;
-    }
 }

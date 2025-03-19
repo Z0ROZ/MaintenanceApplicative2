@@ -19,4 +19,9 @@ public class Reunion extends Event {
     public String description() {
         return "Réunion : " + titre + " à " + lieu + " avec " + participants;
     }
+
+    @Override
+    public boolean isInPeriod(LocalDateTime debut, LocalDateTime fin) {
+        return !dateDebut.isBefore(debut) && !dateDebut.isAfter(fin);
+    }
 }

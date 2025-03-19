@@ -18,7 +18,15 @@ public class Periodique extends Event {
         return "Événement périodique : " + titre + " tous les " + frequence + " jours";
     }
 
-    public FrequenceJours getFrequence() {
-        return frequence;
+
+    public boolean isInPeriod(LocalDateTime debut, LocalDateTime fin) {
+        LocalDateTime temp = this.dateDebut;
+        while (temp.isBefore(fin)) {
+            if (!temp.isBefore(debut)) {
+                return true;
+            }
+            temp = temp.plusDays(this.frequence.jours());
+        }
+        return false;
     }
 }
