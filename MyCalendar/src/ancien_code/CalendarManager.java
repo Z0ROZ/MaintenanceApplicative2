@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarManager {
+public classCalendarManager {
     public List<Event> events;
 
     public CalendarManager() {
