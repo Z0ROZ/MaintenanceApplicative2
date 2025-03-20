@@ -1,10 +1,11 @@
 package action.auth;
 
 import action.Action;
+import action.exceptions.AuthentificationException;
 import user.UserManager;
 
 public class RegisterAction implements Action {
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public RegisterAction(UserManager userManager) {
         this.userManager = userManager;
@@ -12,8 +13,8 @@ public class RegisterAction implements Action {
 
 
     @Override
-    public void executer() {
-        userManager.creerCompte();
+    public void execute() throws AuthentificationException{
+        userManager.register();
     }
 
     @Override

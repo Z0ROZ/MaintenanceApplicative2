@@ -5,6 +5,7 @@ import calendar.CalendarManager;
 import event.Event;
 import event.Reunion;
 import event.primitives.*;
+import user.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,32 +14,34 @@ import java.util.Scanner;
 
 public class ReunionAction implements Action {
     private final CalendarManager calendarManager;
+    private final UserManager userManager;
     private final Scanner scanner;
 
-    public ReunionAction(CalendarManager calendarManager, Scanner scanner) {
+    public ReunionAction(CalendarManager calendarManager, Scanner scanner, UserManager userManager) {
         this.calendarManager = calendarManager;
+        this.userManager = userManager;
         this.scanner = scanner;
     }
 
     @Override
-    public void executer() {
+    public void execute() {
         System.out.println("=== Création d'une Réunion ===");
         System.out.print("Titre de la réunion : ");
-        String titre = scanner.nextLine();
+        String title = scanner.nextLine();
         System.out.print("Année (AAAA) : ");
-        int annee = Integer.parseInt(scanner.nextLine());
+        int year = Integer.parseInt(scanner.nextLine());
         System.out.print("Mois (1-12) : ");
-        int mois = Integer.parseInt(scanner.nextLine());
+        int month = Integer.parseInt(scanner.nextLine());
         System.out.print("Jour (1-31) : ");
-        int jour = Integer.parseInt(scanner.nextLine());
+        int day = Integer.parseInt(scanner.nextLine());
         System.out.print("Heure de début (0-23) : ");
-        int heure = Integer.parseInt(scanner.nextLine());
+        int hour = Integer.parseInt(scanner.nextLine());
         System.out.print("Minute de début (0-59) : ");
         int minute = Integer.parseInt(scanner.nextLine());
-        LocalDateTime dateDebut = LocalDateTime.of(annee, mois, jour, heure, minute);
+        LocalDateTime dateDebut = LocalDateTime.of(year, month, day, hour, minute);
 
         System.out.print("Durée de la réunion (en minutes) : ");
-        int duree = Integer.parseInt(scanner.nextLine());
+        int duration = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Lieu de la réunion : ");
         String lieu = scanner.nextLine();
@@ -54,15 +57,15 @@ public class ReunionAction implements Action {
         }
 
 
-        TitreEvenement titreEvenement = new TitreEvenement(titre);
-        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement("Utilisateur");
-        DureeEvenement dureeEvenement = new DureeEvenement(duree);
+        TitreEvenement titreEvenement = new TitreEvenement(title);
+        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement(userManager.getCurrentUser().getUsername());
+        DureeEvenement dureeEvenement = new DureeEvenement(duration);
         LieuEvenement lieuEvenement = new LieuEvenement(lieu);
         ParticipantsEvenement participantsEvenement = new ParticipantsEvenement(participants);
 
         Event reunion = new Reunion(titreEvenement, proprietaireEvenement, dateDebut, dureeEvenement, lieuEvenement, participantsEvenement);
 
-        calendarManager.ajouterEvenement(reunion);
+        calendarManager.addEvent(reunion);
 
         System.out.println("Réunion créée avec succès !");
     }

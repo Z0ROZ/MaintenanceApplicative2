@@ -22,7 +22,7 @@ public class ListAction {
 
     public void execute(int index) {
         if(index >= 0 && index < actions.size()) {
-            actions.get(index).executer();
+            actions.get(index).execute();
         } else {
             System.out.println("Choix invalide.");
         }

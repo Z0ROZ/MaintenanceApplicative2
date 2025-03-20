@@ -14,17 +14,17 @@ public class CalendarManager {
     }
 
 
-    public void ajouterEvenement(Event evenement) {
-        calendar.ajouterEvenement(evenement);
+    public void addEvent(Event event) {
+        calendar.addEvent(event);
     }
 
 
-    public void evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        calendar.evenementsDansPeriode(debut, fin);
+    public void eventInPeriod(LocalDateTime debut, LocalDateTime fin) {
+        calendar.eventInPeriod(debut, fin);
     }
 
-    public void afficherEvenements() {
-        calendar.afficherEvenements();
+    public void displayEvents() {
+        calendar.displayEvents();
     }
 }
 

@@ -1,12 +1,9 @@
 
 
 import action.*;
-import action.auth.ConnectAction;
+import action.auth.LoginAction;
 import action.auth.RegisterAction;
-import action.display_events.DisplayEventAction;
-import action.events_types.PeriodiqueAction;
-import action.events_types.RendezVousAction;
-import action.events_types.ReunionAction;
+import action.menus.DisplayEventMenuAction;
 import calendar.CalendarManager;
 
 import user.UserManager;
@@ -16,20 +13,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        CalendarManager calendar = new CalendarManager();
+        CalendarManager calendarManager = new CalendarManager();
         Scanner scanner = new Scanner(System.in);
-        UserManager utilisateurManager = new UserManager(scanner);
+        UserManager userManager = new UserManager(scanner);
 
-        ListAction listeAction = new ListAction();
-        listeAction.addAction(new ConnectAction(utilisateurManager));
-        listeAction.addAction(new RegisterAction(utilisateurManager));
-        listeAction.addAction(new DisplayEventAction(calendar));
-        listeAction.addAction(new RendezVousAction(calendar, scanner));
-        listeAction.addAction(new ReunionAction(calendar, scanner));
-        listeAction.addAction(new PeriodiqueAction(calendar, scanner));
+        ListAction menuConnexion = new ListAction();
+        menuConnexion.addAction(new LoginAction(userManager));
+        menuConnexion.addAction(new RegisterAction(userManager));
+
 
         while (true) {
-            try {
+
                 // Affichage du logo
                 System.out.println("  _____         _                   _                __  __");
                 System.out.println(" / ____|       | |                 | |              |  \\/  |");
@@ -41,15 +35,22 @@ public class Main {
                 System.out.println("                                                                                  |___/");
                 System.out.println();
 
-                // Affichage de la liste des actions
-                listeAction.displayActions();
+                System.out.println("\n=== Menu Principal ===");
+                menuConnexion.displayActions();
                 System.out.print("Votre choix : ");
-                int choix = Integer.parseInt(scanner.nextLine());  // Prend l'input de l'utilisateur
-                listeAction.execute(choix - 1);  // Exécute l'action correspondante
+
+            try {
+                int choix = Integer.parseInt(scanner.nextLine());
+                menuConnexion.execute(choix - 1);
+                System.out.println(userManager);
+                if (userManager.isLoggedIn()) {
+                    DisplayEventMenuAction menuPrincipal = new DisplayEventMenuAction(scanner, calendarManager, userManager);
+                    menuPrincipal.execute();
+                }
             } catch (NumberFormatException e) {
-                // Si l'utilisateur entre un nombre invalide
                 System.out.println("Veuillez entrer un nombre valide.");
             }
+
         }
     }
 }

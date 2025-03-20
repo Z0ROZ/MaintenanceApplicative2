@@ -8,21 +8,24 @@ import event.primitives.DureeEvenement;
 import event.primitives.FrequenceJours;
 import event.primitives.ProprietaireEvenement;
 import event.primitives.TitreEvenement;
+import user.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class PeriodiqueAction implements Action {
     private final CalendarManager calendarManager;
+    private final UserManager userManager;
     private final Scanner scanner;
 
-    public PeriodiqueAction(CalendarManager calendarManager, Scanner scanner) {
+    public PeriodiqueAction(CalendarManager calendarManager, Scanner scanner, UserManager userManager) {
         this.calendarManager = calendarManager;
         this.scanner = scanner;
+        this.userManager = userManager;
     }
 
     @Override
-    public void executer() {
+    public void execute() {
         System.out.println("=== Création d'un Événement Périodique ===");
         System.out.print("Titre de l'événement : ");
         String titre = scanner.nextLine();
@@ -49,12 +52,12 @@ public class PeriodiqueAction implements Action {
         FrequenceJours frequenceJours = new FrequenceJours(frequence);
 
         TitreEvenement titreEvenement = new TitreEvenement(titre);
-        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement("Utilisateur");
+        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement(userManager.getCurrentUser().getUsername());
         DureeEvenement dureeEvenement = new DureeEvenement(60);
 
         Event evenementPeriodique = new Periodique(titreEvenement, proprietaireEvenement, dateDebut, dureeEvenement, frequenceJours);
 
-        calendarManager.ajouterEvenement(evenementPeriodique);
+        calendarManager.addEvent(evenementPeriodique);
 
         System.out.println("Événement périodique créé avec succès !");
     }

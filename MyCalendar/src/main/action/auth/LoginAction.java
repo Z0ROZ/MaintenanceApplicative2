@@ -3,16 +3,16 @@ package action.auth;
 import action.Action;
 import user.UserManager;
 
-public class ConnectAction implements Action {
+public class LoginAction implements Action {
     private UserManager userManager;
 
-    public ConnectAction(UserManager userManager) {
+    public LoginAction(UserManager userManager) {
         this.userManager = userManager;
     }
 
     @Override
-    public void executer() {
-        userManager.seConnecter();
+    public void execute() {
+        userManager.login();
     }
 
     @Override

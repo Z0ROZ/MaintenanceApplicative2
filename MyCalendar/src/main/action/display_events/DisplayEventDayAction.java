@@ -16,19 +16,19 @@ public class DisplayEventDayAction implements Action {
     }
 
     @Override
-    public void executer() {
+    public void execute() {
         System.out.print("Entrez l'année (AAAA) : ");
-        int annee = Integer.parseInt(scanner.nextLine());
+        int year = Integer.parseInt(scanner.nextLine());
         System.out.print("Entrez le mois (1-12) : ");
-        int mois = Integer.parseInt(scanner.nextLine());
+        int month = Integer.parseInt(scanner.nextLine());
         System.out.print("Entrez le jour (1-31) : ");
-        int jour = Integer.parseInt(scanner.nextLine());
+        int day = Integer.parseInt(scanner.nextLine());
 
-        LocalDateTime debut = LocalDateTime.of(annee, mois, jour, 0, 0);
-        LocalDateTime fin = debut.plusDays(1).minusSeconds(1);
+        LocalDateTime beginning = LocalDateTime.of(year, month, day, 0, 0);
+        LocalDateTime end = beginning.plusDays(1).minusSeconds(1);
 
-        calendarManager.evenementsDansPeriode(debut, fin);
-        calendarManager.afficherEvenements();
+        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.displayEvents();
     }
 
     @Override

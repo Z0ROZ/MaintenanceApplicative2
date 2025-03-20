@@ -1,10 +1,7 @@
 package action.display_events;
 
 import calendar.CalendarManager;
-
 import java.time.LocalDateTime;
-import java.time.temporal.WeekFields;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class DisplayEventWeekAction {
@@ -17,17 +14,17 @@ public class DisplayEventWeekAction {
         this.scanner = scanner;
     }
 
-    public void executer() {
+    public void execute() {
         System.out.print("Entrez l'année (AAAA) : ");
-        int annee = Integer.parseInt(scanner.nextLine());
+        int year = Integer.parseInt(scanner.nextLine());
         System.out.print("Entrez le numéro de semaine (1-52) : ");
-        int semaine = Integer.parseInt(scanner.nextLine());
+        int week = Integer.parseInt(scanner.nextLine());
 
-        LocalDateTime debut = LocalDateTime.of(annee,semaine, 1, 0, 0);
-        LocalDateTime fin= debut.plusDays(7).minusSeconds(1);
+        LocalDateTime beginning = LocalDateTime.of(year, week, 1, 0, 0);
+        LocalDateTime end = beginning.plusDays(7).minusSeconds(1);
 
-        calendarManager.evenementsDansPeriode(debut, fin);
-        calendarManager.afficherEvenements();
+        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.displayEvents();
 
     }
 

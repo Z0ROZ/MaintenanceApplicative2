@@ -1,19 +1,18 @@
 package action.display_events;
 
-
 import action.Action;
 import calendar.CalendarManager;
 
 public class DisplayEventAction implements Action {
-    private CalendarManager calendarManager;
+    private final CalendarManager calendarManager;
 
     public DisplayEventAction(CalendarManager calendarManager) {
         this.calendarManager = calendarManager;
     }
 
     @Override
-    public void executer() {
-        calendarManager.afficherEvenements();
+    public void execute() {
+        calendarManager.displayEvents();
     }
 
     @Override

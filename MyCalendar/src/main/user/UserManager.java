@@ -1,5 +1,8 @@
 package user;
 
+import action.exceptions.AuthentificationException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,45 +10,48 @@ import java.util.Scanner;
 
 public class UserManager {
     private List<User> users;
-    private int nbUsers;
-    private Scanner scanner;
+    private User currentUser;
+    private final Scanner scanner;
+    private final String USERS_FILE = "users.json";
 
 
-    public UserManager(Scanner scanner) {
-        users = new ArrayList<User>();
+    public UserManager(Scanner scanner){
+        this.scanner = scanner;
+        users = new ArrayList<>();
+        loadUsers();
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public boolean isLoggedIn() {
+        return currentUser != null;
     }
 
-    public void removeUser(User user) {
-        users.remove(user);
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public void seConnecter() {
+    public void login() throws AuthentificationException {
         System.out.print("Nom d'utilisateur: ");
         String username = scanner.nextLine();
         System.out.print("Mot de passe: ");
         String motDePasse = scanner.nextLine();
 
-        boolean authentifie = false;
-        for (int i = 0; i < nbUsers; i++) {
-            User u = users.get(i);
-            if (u.getName().equals(username) && u.getPassword().equals(motDePasse)) {
-                authentifie = true;
+        boolean isLogged = false;
+        for (User u : users) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(PasswordUtils.hashPassword(motDePasse))) {
+                currentUser = u;
+                isLogged = true;
                 break;
             }
         }
 
-        if (authentifie) {
+        if (isLogged) {
             System.out.println("Connexion réussie !");
         } else {
-            System.out.println("Identifiants incorrects.");
+            throw new AuthentificationException("Identifiants incorrects.");
         }
     }
 
-    public void creerCompte() {
+    public void register() {
         System.out.print("Nom d'utilisateur: ");
         String username = scanner.nextLine();
         System.out.print("Mot de passe: ");
@@ -54,12 +60,30 @@ public class UserManager {
         String confirmation = scanner.nextLine();
 
         if (confirmation.equals(motDePasse)) {
-            users.add(new User(username, motDePasse));
-            nbUsers++;
+            User newUser = new User(username, PasswordUtils.hashPassword(motDePasse));
+            users.add(newUser);
+            saveUsers();
             System.out.println("Compte créé avec succès !");
         } else {
             System.out.println("Les mots de passe ne correspondent pas...");
         }
     }
 
+    private void loadUsers() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
+            users = (List<User>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("Aucun utilisateur enregistré, démarrage initial...");
+        } catch (IOException | ClassNotFoundException e) {
+            //throw new AuthentificationException("Problème lors de la récupération des utilisateurs", e);
+        }
+    }
+
+    private void saveUsers() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE))) {
+            oos.writeObject(users);
+        } catch (IOException e) {
+            //throw new AuthentificationException("Problème lors de la sauvegarde des utilisateurs", e);
+        }
+    }
 }

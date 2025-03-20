@@ -8,24 +8,24 @@ import event.Event;
 
 public class Calendar {
 
-    private final List<Event> evenements;
+    private final List<Event> events;
 
     public Calendar() {
-        this.evenements = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
-    public void ajouterEvenement(Event evenement) {
-        evenements.add(evenement);
+    public void addEvent(Event event) {
+        events.add(event);
     }
 
-    public List<Event> evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        return evenements.stream()
+    public List<Event> eventInPeriod(LocalDateTime debut, LocalDateTime fin) {
+        return events.stream()
                 .filter(event -> event.isInPeriod(debut, fin))
                 .collect(Collectors.toList());
     }
 
-    public void afficherEvenements() {
-        evenements.forEach(e -> System.out.println(e.description()));
+    public void displayEvents() {
+        events.forEach(e -> System.out.println(e.description()));
     }
 
 }

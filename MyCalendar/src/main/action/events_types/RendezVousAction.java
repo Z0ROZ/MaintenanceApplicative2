@@ -6,21 +6,24 @@ import event.RendezVous;
 import event.primitives.DureeEvenement;
 import event.primitives.ProprietaireEvenement;
 import event.primitives.TitreEvenement;
+import user.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class RendezVousAction implements Action {
     private final CalendarManager calendarManager;
+    private final UserManager userManager;
     private final Scanner scanner;
 
-    public RendezVousAction(CalendarManager calendarManager, Scanner scanner) {
+    public RendezVousAction(CalendarManager calendarManager, Scanner scanner, UserManager userManager) {
         this.calendarManager = calendarManager;
+        this.userManager = userManager;
         this.scanner = scanner;
     }
 
     @Override
-    public void executer() {
+    public void execute() {
         System.out.print("Titre du rendez-vous : ");
         String titre = scanner.nextLine();
         System.out.print("Année (AAAA) : ");
@@ -38,12 +41,12 @@ public class RendezVousAction implements Action {
 
         RendezVous rdv = new RendezVous(
                 new TitreEvenement(titre),
-                new ProprietaireEvenement("Utilisateur"),
+                new ProprietaireEvenement(userManager.getCurrentUser().getUsername()),
                 LocalDateTime.of(annee, mois, jour, heure, minute),
                 new DureeEvenement(duree)
         );
 
-        calendarManager.ajouterEvenement(rdv);
+        calendarManager.addEvent(rdv);
         System.out.println("Rendez-vous ajouté !");
     }
 

@@ -2,13 +2,12 @@ package action.display_events;
 
 import action.Action;
 import calendar.CalendarManager;
-
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class DisplayEventMonthAction implements Action {
-    private CalendarManager calendarManager;
-    private Scanner scanner;
+    private final CalendarManager calendarManager;
+    private final Scanner scanner;
 
     public DisplayEventMonthAction(CalendarManager calendarManager, Scanner scanner) {
         this.calendarManager = calendarManager;
@@ -17,15 +16,17 @@ public class DisplayEventMonthAction implements Action {
 
 
     @Override
-    public void executer() {
+    public void execute() {
         System.out.print("Entrez l'année (AAAA) : ");
-        int annee = Integer.parseInt(scanner.nextLine());
+        int year = Integer.parseInt(scanner.nextLine());
         System.out.print("Entrez le mois (1-12) : ");
-        int mois = Integer.parseInt(scanner.nextLine());
+        int month = Integer.parseInt(scanner.nextLine());
 
-        LocalDateTime debutJour = LocalDateTime.of(annee, mois, 1, 0, 0);
-        calendarManager.evenementsDansPeriode(debutJour, debutJour.plusMonths(1).minusSeconds(1));
-        calendarManager.afficherEvenements();
+        LocalDateTime beginning = LocalDateTime.of(year, month, 1, 0, 0);
+        LocalDateTime end = beginning.plusMonths(1).minusSeconds(1);
+
+        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.displayEvents();
     }
 
     @Override
