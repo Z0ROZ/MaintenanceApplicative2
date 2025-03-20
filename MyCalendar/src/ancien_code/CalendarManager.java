@@ -36,7 +36,7 @@ public classCalendarManager {
         return result;
     }
 
-    public boolean conflit(Event e1, Event e2) {
+    public boolean conflit(event e1, event e2) {
         LocalDateTime fin1 = e1.dateDebut.plusMinutes(e1.dureeMinutes);
         LocalDateTime fin2 = e2.dateDebut.plusMinutes(e2.dureeMinutes);
 

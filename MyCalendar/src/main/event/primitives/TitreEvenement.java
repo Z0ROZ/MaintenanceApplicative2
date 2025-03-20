@@ -1,4 +1,4 @@
-package Event.primitives;
+package event.primitives;
 
 public record TitreEvenement(String valeur) {
     public TitreEvenement {

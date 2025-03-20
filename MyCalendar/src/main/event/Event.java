@@ -1,9 +1,8 @@
-package Event;
+package event;
 
-import Event.primitives.DureeEvenement;
-import Event.primitives.ProprietaireEvenement;
-import Event.primitives.TitreEvenement;
-
+import event.primitives.DureeEvenement;
+import event.primitives.ProprietaireEvenement;
+import event.primitives.TitreEvenement;
 import java.time.LocalDateTime;
 
 public abstract class Event {

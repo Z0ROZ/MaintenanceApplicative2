@@ -1,4 +1,4 @@
-package Event.primitives;
+package event.primitives;
 
 import java.util.List;
 

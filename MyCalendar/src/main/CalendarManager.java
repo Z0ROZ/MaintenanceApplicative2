@@ -1,4 +1,4 @@
-import Event.Event;
+import event.Event;
 import calendar.Calendar;
 import java.time.LocalDateTime;
 import java.util.List;
