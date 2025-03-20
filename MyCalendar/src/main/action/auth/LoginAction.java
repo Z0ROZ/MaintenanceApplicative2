@@ -4,7 +4,7 @@ import action.Action;
 import user.UserManager;
 
 public class LoginAction implements Action {
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public LoginAction(UserManager userManager) {
         this.userManager = userManager;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListAction {
-    private List<Action> actions;
+    private final List<Action> actions;
 
     public ListAction() {
         this.actions = new ArrayList<>();

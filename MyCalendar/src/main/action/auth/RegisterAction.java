@@ -13,7 +13,7 @@ public class RegisterAction implements Action {
 
 
     @Override
-    public void execute() throws AuthentificationException{
+    public void execute(){
         userManager.register();
     }
 

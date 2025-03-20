@@ -29,7 +29,7 @@ public class UserManager {
         return currentUser;
     }
 
-    public void login() throws AuthentificationException {
+    public void login(){
         System.out.print("Nom d'utilisateur: ");
         String username = scanner.nextLine();
         System.out.print("Mot de passe: ");
@@ -47,7 +47,8 @@ public class UserManager {
         if (isLogged) {
             System.out.println("Connexion réussie !");
         } else {
-            throw new AuthentificationException("Identifiants incorrects.");
+            System.out.println("Identifiants incorrects.");
+            //throw new AuthentificationException("Identifiants incorrects.");
         }
     }
 
