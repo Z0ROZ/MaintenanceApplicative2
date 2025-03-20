@@ -1,7 +1,8 @@
+package calendar;
+
 import event.Event;
-import calendar.Calendar;
+
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 public class CalendarManager {
@@ -18,10 +19,9 @@ public class CalendarManager {
     }
 
 
-    public List<Event> evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        return calendar.evenementsDansPeriode(debut, fin);
+    public void evenementsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
+        calendar.evenementsDansPeriode(debut, fin);
     }
-
 
     public void afficherEvenements() {
         calendar.afficherEvenements();

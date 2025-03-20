@@ -1,5 +1,6 @@
-package action;
+package action.auth;
 
+import action.Action;
 import user.UserManager;
 
 public class ConnectAction implements Action {

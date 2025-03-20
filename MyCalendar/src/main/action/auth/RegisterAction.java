@@ -1,11 +1,12 @@
-package action;
+package action.auth;
 
+import action.Action;
 import user.UserManager;
 
-public class CreateAccountAction implements Action {
+public class RegisterAction implements Action {
     private UserManager userManager;
 
-    public CreateAccountAction(UserManager userManager) {
+    public RegisterAction(UserManager userManager) {
         this.userManager = userManager;
     }
 
