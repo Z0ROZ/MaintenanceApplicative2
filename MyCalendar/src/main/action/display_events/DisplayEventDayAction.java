@@ -33,6 +33,6 @@ public class DisplayEventDayAction implements Action {
 
     @Override
     public String getName() {
-        return "";
+        return "Afficher les événements d'un JOUR précis";
     }
 }

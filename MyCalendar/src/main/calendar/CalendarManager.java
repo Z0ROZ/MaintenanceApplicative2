@@ -19,8 +19,8 @@ public class CalendarManager {
     }
 
 
-    public void eventInPeriod(LocalDateTime debut, LocalDateTime fin) {
-        calendar.eventInPeriod(debut, fin);
+    public void eventInPeriod(LocalDateTime beginning, LocalDateTime end) {
+        calendar.eventInPeriod(beginning, end);
     }
 
     public void displayEvents() {

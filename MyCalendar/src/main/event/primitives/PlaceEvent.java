@@ -1,7 +1,7 @@
 package event.primitives;
 
-public record LieuEvenement(String valeur) {
-    public LieuEvenement {
+public record PlaceEvent(String valeur) {
+    public PlaceEvent {
         if (valeur == null || valeur.isBlank()) {
             throw new IllegalArgumentException("Le lieu ne peut pas être vide");
         }

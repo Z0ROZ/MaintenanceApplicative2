@@ -1,4 +1,4 @@
-package action.exceptions;
+package exceptions;
 
 public class AuthentificationException extends Exception {
 

@@ -1,24 +1,24 @@
 package event;
 
-import event.primitives.DureeEvenement;
-import event.primitives.ProprietaireEvenement;
-import event.primitives.TitreEvenement;
+import event.primitives.DurationEvent;
+import event.primitives.OwnerEvent;
+import event.primitives.TitleEvent;
 
 import java.time.LocalDateTime;
 
 public class RendezVous extends Event {
 
-    public RendezVous(TitreEvenement titre, ProprietaireEvenement proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
-        super(titre, proprietaire, dateDebut, duree);
+    public RendezVous(TitleEvent title, OwnerEvent owner, LocalDateTime beginning, DurationEvent duration) {
+        super(title, owner, beginning, duration);
     }
 
     @Override
     public String description() {
-        return "RDV : " + titre + " à " + dateDebut.toString();
+        return "RDV : " + getTitle() + " à " + getBeginning();
     }
 
     @Override
-    public boolean isInPeriod(LocalDateTime debut, LocalDateTime fin) {
-        return !dateDebut.isBefore(debut) && !dateDebut.isAfter(fin);
+    public boolean isInPeriod(LocalDateTime first, LocalDateTime end) {
+        return !beginning.isBefore(first) && !beginning.isAfter(end);
     }
 }

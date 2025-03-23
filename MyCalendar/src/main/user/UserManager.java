@@ -1,7 +1,5 @@
 package user;
 
-import action.exceptions.AuthentificationException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +31,11 @@ public class UserManager {
         System.out.print("Nom d'utilisateur: ");
         String username = scanner.nextLine();
         System.out.print("Mot de passe: ");
-        String motDePasse = scanner.nextLine();
+        String password = scanner.nextLine();
 
         boolean isLogged = false;
         for (User u : users) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(PasswordUtils.hashPassword(motDePasse))) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(PasswordUtils.hashPassword(password))) {
                 currentUser = u;
                 isLogged = true;
                 break;
@@ -56,12 +54,12 @@ public class UserManager {
         System.out.print("Nom d'utilisateur: ");
         String username = scanner.nextLine();
         System.out.print("Mot de passe: ");
-        String motDePasse = scanner.nextLine();
+        String password = scanner.nextLine();
         System.out.print("Répéter mot de passe: ");
         String confirmation = scanner.nextLine();
 
-        if (confirmation.equals(motDePasse)) {
-            User newUser = new User(username, PasswordUtils.hashPassword(motDePasse));
+        if (confirmation.equals(password)) {
+            User newUser = new User(username, PasswordUtils.hashPassword(password));
             users.add(newUser);
             saveUsers();
             System.out.println("Compte créé avec succès !");

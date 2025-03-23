@@ -38,13 +38,13 @@ public class ReunionAction implements Action {
         int hour = Integer.parseInt(scanner.nextLine());
         System.out.print("Minute de début (0-59) : ");
         int minute = Integer.parseInt(scanner.nextLine());
-        LocalDateTime dateDebut = LocalDateTime.of(year, month, day, hour, minute);
+        LocalDateTime beginning = LocalDateTime.of(year, month, day, hour, minute);
 
         System.out.print("Durée de la réunion (en minutes) : ");
         int duration = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Lieu de la réunion : ");
-        String lieu = scanner.nextLine();
+        String place = scanner.nextLine();
 
         System.out.println("Ajouter des participants (tapez 'non' pour arrêter) : ");
         List<String> participants = new ArrayList<>();
@@ -57,13 +57,13 @@ public class ReunionAction implements Action {
         }
 
 
-        TitreEvenement titreEvenement = new TitreEvenement(title);
-        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement(userManager.getCurrentUser().getUsername());
-        DureeEvenement dureeEvenement = new DureeEvenement(duration);
-        LieuEvenement lieuEvenement = new LieuEvenement(lieu);
-        ParticipantsEvenement participantsEvenement = new ParticipantsEvenement(participants);
+        TitleEvent titleEvent = new TitleEvent(title);
+        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername());
+        DurationEvent durationEvent = new DurationEvent(duration);
+        PlaceEvent placeEvent = new PlaceEvent(place);
+        ParticipantsEvent participantsEvent = new ParticipantsEvent(participants);
 
-        Event reunion = new Reunion(titreEvenement, proprietaireEvenement, dateDebut, dureeEvenement, lieuEvenement, participantsEvenement);
+        Event reunion = new Reunion(titleEvent, ownerEvent, beginning, durationEvent, placeEvent, participantsEvent);
 
         calendarManager.addEvent(reunion);
 

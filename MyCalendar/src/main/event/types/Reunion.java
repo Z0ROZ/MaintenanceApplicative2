@@ -5,23 +5,23 @@ import event.primitives.*;
 import java.time.LocalDateTime;
 
 public class Reunion extends Event {
-    protected final LieuEvenement lieu;
-    protected final ParticipantsEvenement participants;
+    protected final PlaceEvent place;
+    protected final ParticipantsEvent participants;
 
 
-    public Reunion(TitreEvenement titre, ProprietaireEvenement proprietaire, LocalDateTime dateDebut, DureeEvenement duree, LieuEvenement lieu, ParticipantsEvenement participant) {
-        super(titre, proprietaire, dateDebut, duree);
-        this.lieu = lieu;
+    public Reunion(TitleEvent title, OwnerEvent owner, LocalDateTime beginning, DurationEvent duration, PlaceEvent place, ParticipantsEvent participant) {
+        super(title, owner, beginning, duration);
+        this.place = place;
         this.participants = participant;
     }
 
     @Override
     public String description() {
-        return "Réunion : " + titre + " à " + lieu + " avec " + participants;
+        return "Réunion : " + getTitle() + " à " + place + " avec " + participants;
     }
 
     @Override
-    public boolean isInPeriod(LocalDateTime debut, LocalDateTime fin) {
-        return !dateDebut.isBefore(debut) && !dateDebut.isAfter(fin);
+    public boolean isInPeriod(LocalDateTime beginning, LocalDateTime end) {
+        return !getBeginning().isBefore(beginning) && !getBeginning().isAfter(end);
     }
 }

@@ -1,10 +1,11 @@
 package action.display_events;
 
+import action.Action;
 import calendar.CalendarManager;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class DisplayEventWeekAction {
+public class DisplayEventWeekAction implements Action {
 
     private final CalendarManager calendarManager;
     private final Scanner scanner;

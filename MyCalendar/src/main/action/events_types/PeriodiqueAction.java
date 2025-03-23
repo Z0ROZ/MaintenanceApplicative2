@@ -4,10 +4,10 @@ import action.Action;
 import calendar.CalendarManager;
 import event.Event;
 import event.Periodique;
-import event.primitives.DureeEvenement;
-import event.primitives.FrequenceJours;
-import event.primitives.ProprietaireEvenement;
-import event.primitives.TitreEvenement;
+import event.primitives.DurationEvent;
+import event.primitives.FrequencyEvent;
+import event.primitives.OwnerEvent;
+import event.primitives.TitleEvent;
 import user.UserManager;
 
 import java.time.LocalDateTime;
@@ -28,36 +28,36 @@ public class PeriodiqueAction implements Action {
     public void execute() {
         System.out.println("=== Création d'un Événement Périodique ===");
         System.out.print("Titre de l'événement : ");
-        String titre = scanner.nextLine();
+        String title= scanner.nextLine();
 
         System.out.print("Année (AAAA) : ");
-        int annee = Integer.parseInt(scanner.nextLine());
+        int year = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Mois (1-12) : ");
-        int mois = Integer.parseInt(scanner.nextLine());
+        int month = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Jour (1-31) : ");
-        int jour = Integer.parseInt(scanner.nextLine());
+        int day = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Heure de début (0-23) : ");
-        int heure = Integer.parseInt(scanner.nextLine());
+        int hour = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Minute de début (0-59) : ");
         int minute = Integer.parseInt(scanner.nextLine());
 
-        LocalDateTime dateDebut = LocalDateTime.of(annee, mois, jour, heure, minute);
+        LocalDateTime beginning = LocalDateTime.of(year, month, day, hour, minute);
 
         System.out.print("Fréquence (en jours) : ");
-        int frequence = Integer.parseInt(scanner.nextLine());
-        FrequenceJours frequenceJours = new FrequenceJours(frequence);
+        int frequency = Integer.parseInt(scanner.nextLine());
+        FrequencyEvent frequencyDay = new FrequencyEvent(frequency);
 
-        TitreEvenement titreEvenement = new TitreEvenement(titre);
-        ProprietaireEvenement proprietaireEvenement = new ProprietaireEvenement(userManager.getCurrentUser().getUsername());
-        DureeEvenement dureeEvenement = new DureeEvenement(60);
+        TitleEvent titleEvent = new TitleEvent(title);
+        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername());
+        DurationEvent durationEvent = new DurationEvent(60);
 
-        Event evenementPeriodique = new Periodique(titreEvenement, proprietaireEvenement, dateDebut, dureeEvenement, frequenceJours);
+        Event periodiqueEvent = new Periodique(titleEvent, ownerEvent, beginning, durationEvent, frequencyDay);
 
-        calendarManager.addEvent(evenementPeriodique);
+        calendarManager.addEvent(periodiqueEvent);
 
         System.out.println("Événement périodique créé avec succès !");
     }

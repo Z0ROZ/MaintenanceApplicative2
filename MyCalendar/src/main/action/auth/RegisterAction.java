@@ -1,7 +1,6 @@
 package action.auth;
 
 import action.Action;
-import action.exceptions.AuthentificationException;
 import user.UserManager;
 
 public class RegisterAction implements Action {

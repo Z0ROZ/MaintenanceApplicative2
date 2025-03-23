@@ -1,26 +1,34 @@
 package event;
 
-import event.primitives.DureeEvenement;
-import event.primitives.ProprietaireEvenement;
-import event.primitives.TitreEvenement;
+import event.primitives.DurationEvent;
+import event.primitives.OwnerEvent;
+import event.primitives.TitleEvent;
+
 import java.time.LocalDateTime;
 
 public abstract class Event {
-    protected final TitreEvenement titre;
-    protected final ProprietaireEvenement proprietaire;
-    protected final LocalDateTime dateDebut;
-    protected final DureeEvenement duree;
+    protected final TitleEvent title;
+    protected final OwnerEvent owner;
+    protected final LocalDateTime beginning;
+    protected final DurationEvent duration;
 
-    public Event(TitreEvenement titre, ProprietaireEvenement proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
-        this.titre = titre;
-        this.proprietaire = proprietaire;
-        this.dateDebut = dateDebut;
-        this.duree = duree;
+    public Event(TitleEvent title, OwnerEvent owner, LocalDateTime beginning, DurationEvent duration) {
+        this.title = title;
+        this.owner = owner;
+        this.beginning = beginning;
+        this.duration = duration;
     }
-
 
     public abstract String description();
 
-    public abstract boolean isInPeriod(LocalDateTime debut, LocalDateTime fin);
+    public abstract boolean isInPeriod(LocalDateTime beginning, LocalDateTime end);
+
+    public TitleEvent getTitle() {
+        return title;
+    }
+
+    public LocalDateTime getBeginning() {
+        return beginning;
+    }
 
 }

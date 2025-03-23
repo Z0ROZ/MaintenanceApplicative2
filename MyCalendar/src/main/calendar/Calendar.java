@@ -18,9 +18,9 @@ public class Calendar {
         events.add(event);
     }
 
-    public List<Event> eventInPeriod(LocalDateTime debut, LocalDateTime fin) {
+    public List<Event> eventInPeriod(LocalDateTime beginning, LocalDateTime end) {
         return events.stream()
-                .filter(event -> event.isInPeriod(debut, fin))
+                .filter(event -> event.isInPeriod(beginning, end))
                 .collect(Collectors.toList());
     }
 
