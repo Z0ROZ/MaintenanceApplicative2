@@ -15,7 +15,7 @@ public class UserManager {
 
     public UserManager(Scanner scanner){
         this.scanner = scanner;
-        users = new ArrayList<>();
+        this.users = new ArrayList<>();
         loadUsers();
     }
 
@@ -46,7 +46,6 @@ public class UserManager {
             System.out.println("Connexion réussie !");
         } else {
             System.out.println("Identifiants incorrects.");
-            //throw new AuthentificationException("Identifiants incorrects.");
         }
     }
 

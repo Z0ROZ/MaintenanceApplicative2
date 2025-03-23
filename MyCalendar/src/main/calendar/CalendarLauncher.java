@@ -18,15 +18,16 @@ public class CalendarLauncher {
         this.userManager = new UserManager(scanner);
     }
 
-
     public void run() {
         while (true) {
-            DisplayAuthMenuAction menuPrincipal = new DisplayAuthMenuAction(scanner,userManager);
+            DisplayAuthMenuAction menuPrincipal = new DisplayAuthMenuAction(scanner, userManager);
             menuPrincipal.execute();
             try {
                 if (userManager.isLoggedIn()) {
                     DisplayEventManagerMenuAction menuEvent = new DisplayEventManagerMenuAction(scanner, calendarManager, userManager);
                     menuEvent.execute();
+                } else {
+                    break;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un nombre valide.");
