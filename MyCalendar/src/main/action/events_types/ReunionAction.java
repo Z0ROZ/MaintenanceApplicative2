@@ -3,7 +3,7 @@ package action.events_types;
 import action.Action;
 import calendar.CalendarManager;
 import event.Event;
-import event.Reunion;
+import event.types.Reunion;
 import event.primitives.*;
 import user.UserManager;
 

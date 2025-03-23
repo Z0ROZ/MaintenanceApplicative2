@@ -3,7 +3,7 @@ package action.events_types;
 import action.Action;
 import calendar.CalendarManager;
 import event.Event;
-import event.Periodique;
+import event.types.Periodique;
 import event.primitives.DurationEvent;
 import event.primitives.FrequencyEvent;
 import event.primitives.OwnerEvent;

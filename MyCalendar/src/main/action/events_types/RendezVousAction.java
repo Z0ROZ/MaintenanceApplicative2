@@ -2,7 +2,7 @@ package action.events_types;
 
 import action.Action;
 import calendar.CalendarManager;
-import event.RendezVous;
+import event.types.RendezVous;
 import event.primitives.DurationEvent;
 import event.primitives.OwnerEvent;
 import event.primitives.TitleEvent;
