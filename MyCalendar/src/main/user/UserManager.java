@@ -74,7 +74,7 @@ public class UserManager {
         } catch (FileNotFoundException e) {
             System.out.println("Aucun utilisateur enregistré, démarrage initial...");
         } catch (IOException | ClassNotFoundException e) {
-            //throw new AuthentificationException("Problème lors de la récupération des utilisateurs", e);
+            System.out.println("Problème lors de la récupération des utilisateurs");
         }
     }
 
@@ -82,7 +82,7 @@ public class UserManager {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE))) {
             oos.writeObject(users);
         } catch (IOException e) {
-            //throw new AuthentificationException("Problème lors de la sauvegarde des utilisateurs", e);
+            System.out.println("Problème lors de la sauvegarde des utilisateurs");
         }
     }
 }
