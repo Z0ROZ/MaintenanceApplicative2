@@ -1,6 +1,7 @@
-package event;
+package event.types;
 
 import event.primitives.*;
+import event.Event;
 
 import java.time.LocalDateTime;
 

@@ -1,8 +1,10 @@
-package event;
+package event.types;
 
 import event.primitives.DurationEvent;
 import event.primitives.OwnerEvent;
 import event.primitives.TitleEvent;
+import event.Event;
+
 
 import java.time.LocalDateTime;
 

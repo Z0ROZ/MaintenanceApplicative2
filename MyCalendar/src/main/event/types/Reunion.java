@@ -1,8 +1,10 @@
-package event;
+package event.types;
 
 import event.primitives.*;
 
 import java.time.LocalDateTime;
+import event.Event;
+
 
 public class Reunion extends Event {
     protected final PlaceEvent place;

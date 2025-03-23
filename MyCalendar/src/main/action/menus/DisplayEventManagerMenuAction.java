@@ -2,7 +2,6 @@ package action.menus;
 
 import action.Action;
 import action.ListAction;
-import action.display_events.DisplayEventAction;
 import action.events_types.PeriodiqueAction;
 import action.events_types.RendezVousAction;
 import action.events_types.ReunionAction;
