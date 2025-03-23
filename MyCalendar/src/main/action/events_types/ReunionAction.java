@@ -3,6 +3,7 @@ package action.events_types;
 import action.Action;
 import calendar.CalendarManager;
 import event.Event;
+import event.EventManager;
 import event.types.Reunion;
 import event.primitives.*;
 import user.UserManager;
@@ -25,20 +26,13 @@ public class ReunionAction implements Action {
 
     @Override
     public void execute() {
+        EventManager eventManager = new EventManager();
+
         System.out.println("=== Création d'une Réunion ===");
         System.out.print("Titre de la réunion : ");
         String title = scanner.nextLine();
-        System.out.print("Année (AAAA) : ");
-        int year = Integer.parseInt(scanner.nextLine());
-        System.out.print("Mois (1-12) : ");
-        int month = Integer.parseInt(scanner.nextLine());
-        System.out.print("Jour (1-31) : ");
-        int day = Integer.parseInt(scanner.nextLine());
-        System.out.print("Heure de début (0-23) : ");
-        int hour = Integer.parseInt(scanner.nextLine());
-        System.out.print("Minute de début (0-59) : ");
-        int minute = Integer.parseInt(scanner.nextLine());
-        LocalDateTime beginning = LocalDateTime.of(year, month, day, hour, minute);
+
+        LocalDateTime beginning = eventManager.setDate() ;
 
         System.out.print("Durée de la réunion (en minutes) : ");
         int duration = Integer.parseInt(scanner.nextLine());
@@ -67,7 +61,6 @@ public class ReunionAction implements Action {
 
         calendarManager.addEvent(reunion);
 
-        System.out.println("Réunion créée avec succès !");
     }
 
 

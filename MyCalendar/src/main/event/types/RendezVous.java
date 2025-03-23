@@ -16,7 +16,7 @@ public class RendezVous extends Event {
 
     @Override
     public String description() {
-        return "RDV : " + getTitle() + " à " + getBeginning();
+        return "RDV : " + getTitle().valeur() + " à " + getBeginning() + " pour une durée de " + getDuration().minutes();
     }
 
     @Override

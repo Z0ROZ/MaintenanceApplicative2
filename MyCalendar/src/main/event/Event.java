@@ -31,4 +31,8 @@ public abstract class Event {
         return beginning;
     }
 
+    public DurationEvent getDuration() {
+        return duration;
+    }
+
 }

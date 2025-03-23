@@ -3,6 +3,7 @@ package action.events_types;
 import action.Action;
 import calendar.CalendarManager;
 import event.Event;
+import event.EventManager;
 import event.types.Periodique;
 import event.primitives.DurationEvent;
 import event.primitives.FrequencyEvent;
@@ -26,26 +27,13 @@ public class PeriodiqueAction implements Action {
 
     @Override
     public void execute() {
+        EventManager eventManager = new EventManager();
+
         System.out.println("=== Création d'un Événement Périodique ===");
         System.out.print("Titre de l'événement : ");
         String title= scanner.nextLine();
 
-        System.out.print("Année (AAAA) : ");
-        int year = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Mois (1-12) : ");
-        int month = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Jour (1-31) : ");
-        int day = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Heure de début (0-23) : ");
-        int hour = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Minute de début (0-59) : ");
-        int minute = Integer.parseInt(scanner.nextLine());
-
-        LocalDateTime beginning = LocalDateTime.of(year, month, day, hour, minute);
+        LocalDateTime beginning = eventManager.setDate();
 
         System.out.print("Fréquence (en jours) : ");
         int frequency = Integer.parseInt(scanner.nextLine());
@@ -59,7 +47,6 @@ public class PeriodiqueAction implements Action {
 
         calendarManager.addEvent(periodiqueEvent);
 
-        System.out.println("Événement périodique créé avec succès !");
     }
 
     @Override

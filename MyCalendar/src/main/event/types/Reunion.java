@@ -19,7 +19,7 @@ public class Reunion extends Event {
 
     @Override
     public String description() {
-        return "Réunion : " + getTitle() + " à " + place + " avec " + participants;
+        return "Réunion : " + getTitle().valeur() + " à " + place + " avec " + participants;
     }
 
     @Override
