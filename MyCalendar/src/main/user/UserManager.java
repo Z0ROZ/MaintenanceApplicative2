@@ -1,5 +1,9 @@
 package user;
 
+import user.message.UserOutput;
+import user.primitives.Password;
+import user.primitives.Username;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +14,13 @@ public class UserManager {
     private List<User> users;
     private User currentUser;
     private final Scanner scanner;
+    private final UserOutput output;
     private final String USERS_FILE = "users.json";
 
 
-    public UserManager(Scanner scanner){
+    public UserManager(Scanner scanner, UserOutput output){
         this.scanner = scanner;
+        this.output = output;
         this.users = new ArrayList<>();
         loadUsers();
     }
@@ -27,43 +33,57 @@ public class UserManager {
         return currentUser;
     }
 
-    public void login(){
-        System.out.print("Nom d'utilisateur: ");
-        String username = scanner.nextLine();
-        System.out.print("Mot de passe: ");
-        String password = scanner.nextLine();
+    public void login() {
+        output.displayMessage("Nom d'utilisateur: ");
+        Username username = Username.of(scanner.nextLine());
+        output.displayMessage("Mot de passe: ");
+        String plainPassword = scanner.nextLine();
 
-        boolean isLogged = false;
-        for (User u : users) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(PasswordUtils.hashPassword(password))) {
-                currentUser = u;
-                isLogged = true;
-                break;
-            }
-        }
+        boolean isLogged = users.stream()
+                .filter(u -> u.getUsername().getValue().equals(username.getValue()))
+                .filter(u -> u.getPassword().matches(plainPassword))
+                .findFirst()
+                .map(u -> {
+                    currentUser = u;
+                    return true;
+                })
+                .orElse(false);
 
-        if (isLogged) {
-            System.out.println("Connexion réussie !");
-        } else {
-            System.out.println("Identifiants incorrects.");
-        }
+        output.displayMessage(isLogged ? "Connexion réussie !" : "Identifiants incorrects.");
     }
 
     public void register() {
-        System.out.print("Nom d'utilisateur: ");
-        String username = scanner.nextLine();
-        System.out.print("Mot de passe: ");
-        String password = scanner.nextLine();
-        System.out.print("Répéter mot de passe: ");
-        String confirmation = scanner.nextLine();
+        try {
+            output.displayMessage("Nom d'utilisateur: ");
+            Username username = Username.of(scanner.nextLine());
 
-        if (confirmation.equals(password)) {
-            User newUser = new User(username, PasswordUtils.hashPassword(password));
+            if (users.stream().anyMatch(u -> u.getUsername().getValue().equals(username.getValue()))) {
+                output.displayMessage("Ce nom d'utilisateur existe déjà");
+                return;
+            }
+
+            output.displayMessage("Mot de passe: ");
+            String password = scanner.nextLine();
+            if (password.length() < 6) {
+                output.displayError("Le mot de passe doit faire au moins 6 caractères");
+                return;
+            }
+
+            output.displayMessage("Répéter mot de passe: ");
+            String confirmation = scanner.nextLine();
+
+            if (!confirmation.equals(password)) {
+                output.displayError("Les mots de passe ne correspondent pas");
+                return;
+            }
+
+            User newUser = new User(username, Password.fromPlainText(password));
             users.add(newUser);
             saveUsers();
-            System.out.println("Compte créé avec succès !");
-        } else {
-            System.out.println("Les mots de passe ne correspondent pas...");
+            output.displayMessage("Compte créé avec succès !");
+
+        } catch (IllegalArgumentException e) {
+            output.displayError("Erreur de validation: " + e.getMessage());
         }
     }
 
@@ -71,9 +91,9 @@ public class UserManager {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
             users = (List<User>) ois.readObject();
         } catch (FileNotFoundException e) {
-            System.out.println("Aucun utilisateur enregistré, démarrage initial...");
+            output.displayMessage("Aucun utilisateur enregistré, démarrage initial...");
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Problème lors de la récupération des utilisateurs");
+            output.displayError("Problème lors de la récupération des utilisateurs");
         }
     }
 
@@ -81,7 +101,7 @@ public class UserManager {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_FILE))) {
             oos.writeObject(users);
         } catch (IOException e) {
-            System.out.println("Problème lors de la sauvegarde des utilisateurs");
+            output.displayError("Problème lors de la sauvegarde des utilisateurs");
         }
     }
 }

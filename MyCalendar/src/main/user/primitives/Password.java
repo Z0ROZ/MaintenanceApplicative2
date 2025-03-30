@@ -1,9 +1,29 @@
-package user;
+package user.primitives;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class PasswordUtils {
+public final class Password {
+    private final String hashedValue;
+
+    private Password(String hashedValue) {
+        if (hashedValue == null || hashedValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le mot de passe ne peut pas être vide");
+        }
+        this.hashedValue = hashedValue;
+    }
+
+
+    public static Password fromPlainText(String plainText) {
+        return new Password(hashPassword(plainText));
+    }
+
+
+    public boolean matches(String plainText) {
+        return this.hashedValue.equals(hashPassword(plainText));
+    }
+
+
     public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -3,6 +3,8 @@ package calendar;
 import action.menus.DisplayAuthMenuAction;
 import action.menus.DisplayEventManagerMenuAction;
 import user.UserManager;
+import user.message.ConsoleUserOutput;
+import user.message.UserOutput;
 
 import java.util.Scanner;
 
@@ -15,7 +17,8 @@ public class CalendarLauncher {
     public CalendarLauncher() {
         this.scanner = new Scanner(System.in);
         this.calendarManager = new CalendarManager();
-        this.userManager = new UserManager(scanner);
+        UserOutput output = new ConsoleUserOutput();
+        this.userManager = new UserManager(scanner, output);
     }
 
     public void run() {
