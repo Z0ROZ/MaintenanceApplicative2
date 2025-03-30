@@ -16,7 +16,12 @@ public class Periodique extends Event {
 
     @Override
     public String description() {
-        return "Événement périodique : " + getTitle().valeur() + " tous les " + frequency + " jours";
+        return String.format("[%s] Périodique: %s | Fréquence: tous les %d jours | Début: %s",
+                getId().value(),
+                getTitle().valeur(),
+                frequency.day(),
+                getBeginning().toLocalDate()
+        );
     }
 
 

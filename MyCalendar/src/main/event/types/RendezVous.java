@@ -16,7 +16,13 @@ public class RendezVous extends Event {
 
     @Override
     public String description() {
-        return "RDV : " + getTitle().valeur() + " à " + getBeginning() + " pour une durée de " + getDuration().minutes();
+        return String.format("[%s] RDV: %s le %s à %s (durée: %d min)",
+                getId().value(),
+                getTitle().valeur(),
+                getBeginning().toLocalDate(),
+                getBeginning().toLocalTime(),
+                getDuration().minutes()
+        );
     }
 
     @Override

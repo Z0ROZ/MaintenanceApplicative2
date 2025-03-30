@@ -19,7 +19,13 @@ public class Reunion extends Event {
 
     @Override
     public String description() {
-        return "Réunion : " + getTitle().valeur() + " à " + place + " avec " + participants;
+        return String.format("[%s] RDV: %s le %s à %s (durée: %d min)",
+                getId().value(),
+                getTitle().valeur(),
+                getBeginning().toLocalDate(),
+                getBeginning().toLocalTime(),
+                getDuration().minutes()
+        );
     }
 
     @Override
