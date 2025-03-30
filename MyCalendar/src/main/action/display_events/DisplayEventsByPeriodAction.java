@@ -7,7 +7,6 @@ import event.EventManager;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Scanner;
 
 public class DisplayEventsByPeriodAction implements Action {
     private final CalendarManager calendarManager;

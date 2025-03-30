@@ -19,7 +19,7 @@ public class DisplayEventMenuAction implements Action {
         listAction.addAction(new DisplayEventMonthAction(calendarManager,scanner));
         listAction.addAction(new DisplayEventWeekAction(calendarManager,scanner));
         listAction.addAction(new DisplayEventDayAction(calendarManager,scanner));
-        listAction.addAction(new DisplayEventsByPeriodAction(calendarManager, scanner)); // Ajout ici
+        listAction.addAction(new DisplayEventsByPeriodAction(calendarManager));
     }
 
 
