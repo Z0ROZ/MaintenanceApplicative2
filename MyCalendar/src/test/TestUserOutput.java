@@ -2,6 +2,7 @@ import user.message.UserOutput;
 
 public class TestUserOutput implements UserOutput {
     private String lastMessage;
+    private String lastError;
 
     @Override
     public void displayMessage(String message) {

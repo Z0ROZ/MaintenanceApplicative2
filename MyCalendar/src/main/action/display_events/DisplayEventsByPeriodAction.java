@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class DisplayEventsByPeriodAction implements Action {
     private final CalendarManager calendarManager;
 
-    public DisplayEventsByPeriodAction(CalendarManager calendarManager, Scanner scanner) {
+    public DisplayEventsByPeriodAction(CalendarManager calendarManager) {
         this.calendarManager = calendarManager;
     }
 
