@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import event.Event;
+import event.primitives.EventId;
 
 public class Calendar {
 
@@ -31,5 +32,9 @@ public class Calendar {
 
     public List<Event> getEvents() {
         return events;
+    }
+
+    public boolean removeEventById(EventId id) {
+        return events.removeIf(event -> event.getId().value().equals(id.value()));
     }
 }

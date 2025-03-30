@@ -1,6 +1,7 @@
 package calendar;
 
 import event.Event;
+import event.primitives.EventId;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,15 @@ public class CalendarManager {
 
     public void displayEvents() {
         calendar.displayEvents();
+    }
+
+    public boolean removeEvent(EventId id) {
+        if (calendar.removeEventById(id)) {
+            System.out.println("Événement supprimé avec succès");
+            return true;
+        }
+        System.out.println("Événement non trouvé");
+        return false;
     }
 }
 

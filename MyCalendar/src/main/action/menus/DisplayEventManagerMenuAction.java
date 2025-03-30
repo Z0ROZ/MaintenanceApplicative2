@@ -2,6 +2,7 @@ package action.menus;
 
 import action.Action;
 import action.ListAction;
+import action.display_events.RemoveEventAction;
 import action.events_types.BirthDayAction;
 import action.events_types.PeriodiqueAction;
 import action.events_types.RendezVousAction;
@@ -26,7 +27,8 @@ public class DisplayEventManagerMenuAction implements Action {
         this.listAction.addAction(new RendezVousAction(calendarManager, scanner, userManager));
         this.listAction.addAction(new ReunionAction(calendarManager, scanner, userManager));
         this.listAction.addAction(new PeriodiqueAction(calendarManager, scanner, userManager));
-        this.listAction.addAction(new BirthDayAction(calendarManager, scanner, userManager)); // Ajout ici
+        this.listAction.addAction(new BirthDayAction(calendarManager, scanner, userManager));
+        this.listAction.addAction(new RemoveEventAction(calendarManager, scanner));
         // Déconnexion
     }
 
