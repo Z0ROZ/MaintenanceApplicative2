@@ -2,32 +2,20 @@ package calendar;
 
 import event.Event;
 import event.primitives.EventId;
-
 import java.time.LocalDateTime;
-
-
 import java.util.List;
 
 public class CalendarManager {
-
     private final Calendar calendar;
+    private final CalendarOutput output;
 
     public CalendarManager() {
         this.calendar = new Calendar();
+        this.output = new CalendarOutput();
     }
 
     public void addEvent(Event event) {
-        if (isTitleUnique(event)) {
-            calendar.addEvent(event);
-            System.out.println("Événement ajouté avec succès !");
-        } else {
-            System.out.println("Erreur : Un événement avec ce titre existe déjà.");
-        }
-    }
-
-    private boolean isTitleUnique(Event event) {
-        return calendar.getEvents().stream()
-                .noneMatch(existingEvent -> existingEvent.getTitle().valeur().equals(event.getTitle().valeur()));
+        calendar.validateAndAddEvent(event);
     }
 
     public List<Event> getEventsBetween(LocalDateTime start, LocalDateTime end) {
@@ -39,11 +27,7 @@ public class CalendarManager {
     }
 
     public void removeEvent(EventId id) {
-        if (calendar.removeEventById(id)) {
-            System.out.println("Événement supprimé avec succès");
-        }
-        System.out.println("Événement non trouvé");
+        calendar.removeEventAndNotify(id);
     }
 }
-
 
