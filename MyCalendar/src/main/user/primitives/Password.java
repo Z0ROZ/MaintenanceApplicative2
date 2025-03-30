@@ -18,13 +18,16 @@ public final class Password implements Serializable {
     }
 
 
-    public static Password fromPlainText(String plainText) {
-        return new Password(hashPassword(plainText));
+    public static Password fromPlainText(String password) {
+        if (password == null) {
+            throw new IllegalArgumentException("Le mot de passe ne peut pas être null");
+        }
+        return new Password(hashPassword(password));
     }
 
 
-    public boolean matches(String plainText) {
-        return this.hashedValue.equals(hashPassword(plainText));
+    public boolean matches(String password) {
+        return this.hashedValue.equals(hashPassword(password));
     }
 
 
@@ -40,5 +43,10 @@ public final class Password implements Serializable {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Erreur lors du hashage", e);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "*".repeat(13);
     }
 }
