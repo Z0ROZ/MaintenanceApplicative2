@@ -59,15 +59,10 @@ public class UserManager {
 
             if (users.stream().anyMatch(u -> u.getUsername().getValue().equals(username.getValue()))) {
                 output.displayMessage("Ce nom d'utilisateur existe déjà");
-                return;
             }
 
             output.displayMessage("Mot de passe: ");
             String password = scanner.nextLine();
-            if (password.length() < 6) {
-                output.displayError("Le mot de passe doit faire au moins 6 caractères");
-                return;
-            }
 
             output.displayMessage("Répéter mot de passe: ");
             String confirmation = scanner.nextLine();

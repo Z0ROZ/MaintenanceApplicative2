@@ -52,7 +52,7 @@ public class ReunionAction implements Action {
 
 
         TitleEvent titleEvent = new TitleEvent(title);
-        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername());
+        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername().getValue());
         DurationEvent durationEvent = new DurationEvent(duration);
         PlaceEvent placeEvent = new PlaceEvent(place);
         ParticipantsEvent participantsEvent = new ParticipantsEvent(participants);

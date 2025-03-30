@@ -40,7 +40,7 @@ public class PeriodiqueAction implements Action {
         FrequencyEvent frequencyDay = new FrequencyEvent(frequency);
 
         TitleEvent titleEvent = new TitleEvent(title);
-        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername());
+        OwnerEvent ownerEvent = new OwnerEvent(userManager.getCurrentUser().getUsername().getValue());
         DurationEvent durationEvent = new DurationEvent(60);
 
         Event periodiqueEvent = new Periodique(titleEvent, ownerEvent, beginning, durationEvent, frequencyDay);

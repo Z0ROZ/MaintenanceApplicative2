@@ -1,6 +1,11 @@
 package user.primitives;
 
-public final class Username {
+import java.io.Serial;
+import java.io.Serializable;
+
+public final class Username implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final String value;
 
     private Username(String value) {

@@ -1,9 +1,13 @@
 package user.primitives;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public final class Password {
+public final class Password implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final String hashedValue;
 
     private Password(String hashedValue) {

@@ -32,7 +32,7 @@ public class DisplayEventManagerMenuAction implements Action {
     @Override
     public void execute() {
         while (userManager.isLoggedIn()) {
-            System.out.println("\nBonjour, " + userManager.getCurrentUser().getUsername());
+            System.out.println("\nBonjour, " + userManager.getCurrentUser().getUsername().getValue());
             System.out.println("=== Menu Gestionnaire d'Événements ===");
             listAction.displayActions();
             System.out.print("Votre choix : ");

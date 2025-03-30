@@ -37,7 +37,7 @@ public class RendezVousAction implements Action {
 
         RendezVous rdv = new RendezVous(
                 new TitleEvent(title),
-                new OwnerEvent(userManager.getCurrentUser().getUsername()),
+                new OwnerEvent(userManager.getCurrentUser().getUsername().getValue()),
                 beginning,
                 new DurationEvent(duration)
         );

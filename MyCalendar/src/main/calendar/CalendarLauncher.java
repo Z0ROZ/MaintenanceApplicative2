@@ -9,34 +9,31 @@ import user.message.UserOutput;
 import java.util.Scanner;
 
 public class CalendarLauncher {
-
     private final Scanner scanner;
     private final CalendarManager calendarManager;
     private final UserManager userManager;
+    private final UserOutput output;
 
     public CalendarLauncher() {
         this.scanner = new Scanner(System.in);
         this.calendarManager = new CalendarManager();
-        UserOutput output = new ConsoleUserOutput();
+        this.output = new ConsoleUserOutput();
         this.userManager = new UserManager(scanner, output);
     }
 
     public void run() {
         while (true) {
-            DisplayAuthMenuAction menuPrincipal = new DisplayAuthMenuAction(scanner, userManager);
-            menuPrincipal.execute();
-            try {
-                if (userManager.isLoggedIn()) {
+            if (!userManager.isLoggedIn()) {
+                DisplayAuthMenuAction menuAuth = new DisplayAuthMenuAction(scanner, userManager);
+                menuAuth.execute();
+            } else {
+                try {
                     DisplayEventManagerMenuAction menuEvent = new DisplayEventManagerMenuAction(scanner, calendarManager, userManager);
                     menuEvent.execute();
-                } else {
-                    break;
+                } catch (NumberFormatException e) {
+                    output.displayError("Veuillez entrer un nombre valide.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer un nombre valide.");
             }
-
         }
     }
 }
-
