@@ -26,6 +26,13 @@ public abstract class Event {
 
     public abstract boolean isInPeriod(LocalDateTime beginning, LocalDateTime end);
 
+    public boolean overlaps(Event other) {
+        LocalDateTime thisEnd = this.beginning.plusMinutes(this.duration.minutes());
+        LocalDateTime otherEnd = other.beginning.plusMinutes(other.duration.minutes());
+
+        return !this.beginning.isAfter(otherEnd) && !thisEnd.isBefore(other.beginning);
+    }
+
     public TitleEvent getTitle() {
         return title;
     }

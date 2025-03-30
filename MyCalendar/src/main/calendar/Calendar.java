@@ -15,9 +15,25 @@ public class Calendar {
         this.events = new ArrayList<>();
     }
 
-    public void addEvent(Event event) {
-        events.add(event);
+
+    public List<Event> findConflicts(Event newEvent) {
+        return events.stream()
+                .filter(existingEvent -> existingEvent.overlaps(newEvent))
+                .collect(Collectors.toList());
     }
+
+    public void addEvent(Event event) {
+        List<Event> conflicts = findConflicts(event);
+        if (!conflicts.isEmpty()) {
+            System.out.println("Impossible d'ajouter l'événement - Conflits détectés :");
+            conflicts.forEach(e -> System.out.println("- " + e.description()));
+
+        }
+        events.add(event);
+        System.out.println("Événement ajouté avec succès");
+    }
+
+
 
     public List<Event> eventInPeriod(LocalDateTime beginning, LocalDateTime end) {
         return events.stream()
