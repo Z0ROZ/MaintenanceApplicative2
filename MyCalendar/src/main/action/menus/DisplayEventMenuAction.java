@@ -2,10 +2,7 @@ package action.menus;
 
 import action.Action;
 import action.ListAction;
-import action.display_events.DisplayEventAction;
-import action.display_events.DisplayEventDayAction;
-import action.display_events.DisplayEventMonthAction;
-import action.display_events.DisplayEventWeekAction;
+import action.display_events.*;
 import calendar.CalendarManager;
 
 import java.util.Scanner;
@@ -22,6 +19,7 @@ public class DisplayEventMenuAction implements Action {
         listAction.addAction(new DisplayEventMonthAction(calendarManager,scanner));
         listAction.addAction(new DisplayEventWeekAction(calendarManager,scanner));
         listAction.addAction(new DisplayEventDayAction(calendarManager,scanner));
+        listAction.addAction(new DisplayEventsByPeriodAction(calendarManager, scanner)); // Ajout ici
     }
 
 

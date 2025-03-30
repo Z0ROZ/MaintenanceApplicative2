@@ -27,7 +27,7 @@ public class DisplayEventDayAction implements Action {
         LocalDateTime beginning = LocalDateTime.of(year, month, day, 0, 0);
         LocalDateTime end = beginning.plusDays(1).minusSeconds(1);
 
-        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.getEventsBetween(beginning, end);
         calendarManager.displayEvents();
     }
 

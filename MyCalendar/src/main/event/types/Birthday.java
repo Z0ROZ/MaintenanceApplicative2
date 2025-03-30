@@ -14,7 +14,7 @@ public class Birthday extends Event {
 
     @Override
     public String description() {
-        return "Anniversaire : " + getTitle() + " le " + getBeginning().toLocalDate();
+        return "Anniversaire : " + getTitle().valeur() + " le " + getBeginning().toLocalDate();
     }
 
     @Override

@@ -25,7 +25,7 @@ public class DisplayEventMonthAction implements Action {
         LocalDateTime beginning = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime end = beginning.plusMonths(1).minusSeconds(1);
 
-        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.getEventsBetween(beginning, end);
         calendarManager.displayEvents();
     }
 

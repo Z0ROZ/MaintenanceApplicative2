@@ -24,7 +24,7 @@ public class DisplayEventWeekAction implements Action {
         LocalDateTime beginning = LocalDateTime.of(year, week, 1, 0, 0);
         LocalDateTime end = beginning.plusDays(7).minusSeconds(1);
 
-        calendarManager.eventInPeriod(beginning, end);
+        calendarManager.getEventsBetween(beginning, end);
         calendarManager.displayEvents();
 
     }

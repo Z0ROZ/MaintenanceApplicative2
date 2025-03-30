@@ -29,12 +29,8 @@ public class CalendarManager {
                 .noneMatch(existingEvent -> existingEvent.getTitle().valeur().equals(event.getTitle().valeur()));
     }
 
-    public List<Event> eventInPeriod(LocalDateTime beginning, LocalDateTime end) {
-        List<Event> eventsInPeriod = calendar.eventInPeriod(beginning, end);
-
-        eventsInPeriod.forEach(e -> System.out.println(e.description()));
-
-        return eventsInPeriod;
+    public List<Event> getEventsBetween(LocalDateTime start, LocalDateTime end) {
+        return calendar.eventInPeriod(start, end);
     }
 
     public void displayEvents() {
