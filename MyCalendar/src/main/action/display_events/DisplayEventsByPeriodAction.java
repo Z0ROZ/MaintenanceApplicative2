@@ -11,11 +11,9 @@ import java.util.Scanner;
 
 public class DisplayEventsByPeriodAction implements Action {
     private final CalendarManager calendarManager;
-    private final Scanner scanner;
 
     public DisplayEventsByPeriodAction(CalendarManager calendarManager, Scanner scanner) {
         this.calendarManager = calendarManager;
-        this.scanner = scanner;
     }
 
     @Override

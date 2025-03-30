@@ -1,7 +1,7 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import user.primitives.Username;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public class UsernameTest {
@@ -9,7 +9,7 @@ public class UsernameTest {
     void shouldCreateValidUsername() {
         String validName = "testUser";
         Username username = Username.of(validName);
-        assertEquals(validName, username.getValue());
+        Assertions.assertEquals(validName, username.getValue());
     }
 
 
