@@ -38,13 +38,11 @@ public class CalendarManager {
         calendar.displayEvents();
     }
 
-    public boolean removeEvent(EventId id) {
+    public void removeEvent(EventId id) {
         if (calendar.removeEventById(id)) {
             System.out.println("Événement supprimé avec succès");
-            return true;
         }
         System.out.println("Événement non trouvé");
-        return false;
     }
 }
 
